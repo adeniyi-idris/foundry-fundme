@@ -64,3 +64,9 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+
+
+1. proper readme
+2. integration tests
+3. programatic verification
+4. push to github
