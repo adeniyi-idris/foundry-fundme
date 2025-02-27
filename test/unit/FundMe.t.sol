@@ -8,7 +8,7 @@ import {DeployFundMe} from "../../script/DeployFundMe.s.sol";
 contract FundMeTest is Test{
     FundMe  fundMe;
 
-    address USER =makeAddr("user");
+    address USER = makeAddr("user"); // making a user
     uint256 constant SEND_VALUE = 0.1 ether;
     uint256 constant STARTING_BALANCE = 10 ether;
     uint256 constant GAS_PRICE = 1;
@@ -18,7 +18,7 @@ contract FundMeTest is Test{
         // 0x694AA1769357215DE4FAC081bf1f309aDC325306
         DeployFundMe deployFundMe = new DeployFundMe();
         fundMe = deployFundMe.run();
-        vm.deal(USER, STARTING_BALANCE);
+        vm.deal(USER, STARTING_BALANCE);// it set the balance of the USER address to the new value
     }
 
     function testMinimumDollarIsFive() public view{
@@ -37,11 +37,12 @@ contract FundMeTest is Test{
 
     function testFundFailsWithoutEnoughETH() public {
         vm.expectRevert(); // hey, the next line, should revert!
+        // assert(this tx fails/reverts)
         fundMe.fund();
     }
 
     modifier funded(){
-        vm.prank(USER);
+        vm.prank(USER); // The next TX will be sent by USER
         fundMe.fund{value: SEND_VALUE}();
         _;
     }
